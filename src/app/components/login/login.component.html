@@ -1,0 +1,37 @@
+
+    <div class="row-auto d-flex">
+        <div class="col-6">
+            <div class="img-container">
+                <img src="/assets/imgs/logo-login.png" height="100%" width="100%" alt="">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="login-container d-flex flex-column justify-content-around">
+                <h1>Bienvenido</h1>
+                <form [formGroup]="formulariologueo" (ngSubmit)="onSubmit()" class="login-credenciales">
+                    <div class="input-usu">
+                        <label for="usu" class="d-block" >Usuario</label>
+                        <input type="text" formControlName="usuario" >
+                        <span class="text-danger" *ngIf="formulariologueo.controls.usuario.errors?.required && formulariologueo.controls.usuario.touched">
+                            El campo es necesario
+                        </span>
+                    </div>
+                    <div class="input-clave">
+                        <label for="usu" class="d-block">Contraseña</label>
+                        <input type="password" formControlName="clave">
+                        <span class="text-danger" *ngIf="formulariologueo.controls.clave.errors?.required && formulariologueo.controls.usuario.touched">
+                            Ingrese una contraseña
+                        </span>
+                    </div>
+                <br><br><br><br><br>
+                <div class="boton-container d-flex justify-content-center align-items-center">
+                    <button type="submit" class="button rounded-pill">INGRESAR</button>
+                    <div class="spinner-border text-warning ms-2" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+

@@ -1,0 +1,180 @@
+:root{
+    --color-amarillo:#FFCD38;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    display: block;
+    width: 100%;
+}
+
+.navegador{
+    background-color: var(--color-amarillo);
+    height: 60px;
+    /* margin: 0 24px;
+    border-radius: 0px 0px 15px 15px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-logo > .burguer{
+    padding-left: 16px;
+}
+
+.menu-logo > .logo{
+    width: 120px;
+    margin-left: 16px;
+}
+
+.menu-buscador{
+    width: 450px;
+}
+
+.menu-buscador label{
+    background-color: rgba(255, 255, 255, 0.233);
+    border-radius: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.menu-buscador img{
+    padding-right: 8px;
+    padding-left: 15px;
+}
+
+.menu-buscador input{
+    background-color: initial;
+    padding: 14px 5px;
+    box-sizing: border-box;
+    border: 0;
+    outline: 0;
+    width: 100%;
+    border-radius: 0 20px 20px 0;
+    font-size:0.8rem;
+    color: black;
+}
+
+.menu-perfil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-perfil .perfil-imagen{
+    margin-right: 16px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+}
+
+.menu-perfil .perfil-imagen img{
+    width: 100%;
+    padding: 2px;
+    border-radius: 50%;
+}
+
+.menu-perfil > span{
+    width: 110px;
+    text-align: center;
+    padding-right: 10px;
+    font-size: 14px;
+}
+
+.menu-perfil .perfil-imagen:hover {
+    opacity: 0.9;
+}
+
+.items{
+    position: absolute;
+    width: 200px;
+    background-color:var(--color-amarillo);
+    right: 24px;
+    top: 65px;
+    opacity: 1;
+    border-radius: 10px;
+    transition: 0.4s all;
+}
+
+.items a{
+    display: block;
+    padding: 20px 8px;
+    text-decoration: none;
+    color: #333333;
+    text-align: center;
+    font-size: 14px;
+}
+
+.items a:hover{
+    color: white;
+}
+
+.items.oculto{
+    top: -120px;
+    opacity: 0; 
+}
+
+/** burguer-bottom */
+
+.menu-logo img:first-child{
+    position: relative;
+}
+
+.menu-logo img:first-child:hover{
+    cursor: pointer;
+}
+
+.burguer-items{
+    position: absolute;
+    background-color: var(--color-amarillo);
+    left: 16px;
+    top: 65px;
+    width: 250px;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+div[class*="option"]{
+    padding: 8px 5px;
+    background-color: rgba(255, 255, 255, 0.103);
+    margin: 5px;
+    border-radius: 18px;
+}
+
+div[class*="option"] a{
+    display: flex;
+    align-items: center;
+    color: black;
+    text-decoration: none;
+    padding: 5px 8px;
+    font-size: 13px;
+}
+
+div[class*="option"] img{
+    padding-right: 8px;    
+}
+
+
+div[class*="option"] a:hover img{
+    transform: rotate(90deg);
+}
+
+.menu-logo .burguer-items.ocultarBurguer{
+    display: none; 
+}
+
