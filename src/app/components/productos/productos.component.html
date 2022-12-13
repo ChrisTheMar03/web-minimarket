@@ -1,0 +1,102 @@
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addProducto">Nuevo Producto</button>
+        </div>
+        <div class="col-12 mt-3">
+            <h4>Productos</h4>
+        </div>
+        <div class="col-12">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Accion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>@mdo</td>
+                    <td><button class="btn btn-outline-warning">Actualizar</button></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>@mdo</td>
+                    <td><button class="btn btn-outline-warning">Actualizar</button></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="">
+                    <div class="mb-3">
+                      <label for="nombre" class="form-label">Nombre</label>
+                      <input type="text" class="form-control" id="nombre" formControlName="nombre" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio" class="form-label">Precio</label>
+                        <input type="text" class="form-control" id="precio" formControlName="precio" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="stock" class="form-label">Stock</label>
+                        <input type="number" class="form-control" id="stock" formControlName="stock" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="imagen" class="form-label">Url</label>
+                        <input type="text" class="form-control" id="imagen" formControlName="imagen" >
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select mb-3">
+                            <option selected>Categoria</option>
+                            <option value="1">cat1</option>
+                            <option value="2">cat2</option>
+                            <option value="3">cat3</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select mb-3">
+                            <option selected>Marca</option>
+                            <option value="1">m1</option>
+                            <option value="2">m2</option>
+                            <option value="3">m3</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="estado" class="form-label">Estado</label>
+                        <input type="number" class="form-control" id="estado" max="1" min="0">
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary">Guardar</button>
+                    </div>      
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+

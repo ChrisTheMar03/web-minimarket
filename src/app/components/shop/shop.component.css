@@ -1,0 +1,42 @@
+
+.buscador-input{
+    width: 70%;
+    padding: 8px 6px;
+}
+
+.buscador-btn{
+    padding: 8px 10px;
+    margin-left: 8px;
+}
+
+.list-item{
+    width: 25%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.list-item-img{
+    transition: 0.5s all ;
+    width: 100%;
+    min-height: 180px;
+}
+
+.list-item-nombre{
+    display: inline-block;
+    padding: 2px 5px;
+}
+
+.list-item:hover .list-item-img{
+    transform: scale(1.04);
+}
+
+.list-footer{
+    padding: 8px 0px;
+    background-color: white;
+}
+
+.list-footer button:first-child{
+    border-bottom: 1px solid #333;
+}
+

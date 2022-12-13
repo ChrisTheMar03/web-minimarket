@@ -1,0 +1,49 @@
+
+.img-venta,
+.img-ajustes,
+.img-reporte{
+    position: relative;
+    transition: 0.4s all;
+}
+
+.img-container:hover .img-venta{
+    transform: rotate(-10deg);
+}
+
+.img-container:hover .img-ajustes{
+    transform: rotate(-10deg);
+}
+
+.img-container:hover .img-reporte{
+    transform: scale(1.1);
+}
+
+.content{
+    height: 80vh;
+}
+
+.content-principal{
+    width: 100%;
+    /* background-color: lightcoral; */
+    overflow: hidden;
+}
+
+.principal-fecha{
+    margin: 16px 0px;
+    text-align: right;
+}
+
+.principal-fecha > span{
+    display: inline-block;
+    background-color: white;
+    padding: 8px 10px;
+}
+
+.principal-ventas{
+    background-color: white;
+    justify-content: space-between;
+}
+
+.card{
+    /* box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4); */
+}

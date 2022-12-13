@@ -9,13 +9,16 @@ import { Component, OnInit,Renderer2 } from '@angular/core';
 })
 export class CabeceraComponent implements OnInit {
 
+  tipo:string=""
   opcionOculta:boolean=true
 
   @ViewChild("useroption") useroption:ElementRef
+  @ViewChild("burguer") burguer:ElementRef
 
   constructor(private renderer:Renderer2) { }
 
   ngOnInit(): void {
+    this.cargarRol()
   }
 
   togleMenu(){
@@ -26,6 +29,23 @@ export class CabeceraComponent implements OnInit {
       this.renderer.addClass(this.useroption.nativeElement,'oculto')
       this.opcionOculta=!this.opcionOculta
     }
+  }
+
+  cerrarSesion(){
+    localStorage.clear()
+  }
+
+  mostrarOpciones(){
+    this.renderer.addClass(this.burguer.nativeElement,'mostrarBurguer')
+  }
+
+  cerrarBurguer(){
+    this.renderer.removeClass(this.burguer.nativeElement,'mostrarBurguer')
+  }
+
+  cargarRol(){
+    let rol=JSON.parse(localStorage.getItem("usuario")).rol.nombre
+    this.tipo=rol
   }
 
 }

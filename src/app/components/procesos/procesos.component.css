@@ -1,0 +1,27 @@
+
+
+.card-body{
+    display: flex;
+    justify-content: space-evenly;
+}
+.proceso-img{
+    width: 40px;
+    filter: brightness(200%);
+    transition: 0.5s all;
+}
+.proceso-title{
+    display: block;
+    font-size: 1.2rem;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    margin-top: 8px;
+    color: rgba(194, 192, 192, 0.815);
+}
+
+.card:hover .proceso-img{
+    transform: scale(1.05);
+}
+
+.card:hover .proceso-title{
+    color: #333;
+}

@@ -7,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrincipalComponent implements OnInit {
 
-  constructor() { }
+  tipo:string=""
+  isLoading:boolean
+  fecha:string
+
+  constructor() {
+    this.isLoading=true
+  }
 
   ngOnInit(): void {
+    
+    setTimeout(()=>{
+      this.isLoading=false
+    },500)
+    this.obtenerFechaActual()
+  }
+
+  obtenerFechaActual(){
+    this.fecha=new Date().toLocaleDateString().toString()
   }
 
 }

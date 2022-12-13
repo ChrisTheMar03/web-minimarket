@@ -13,24 +13,37 @@
                         <label for="usu" class="d-block" >Usuario</label>
                         <input type="text" formControlName="usuario" >
                         <span class="text-danger" *ngIf="formulariologueo.controls.usuario.errors?.required && formulariologueo.controls.usuario.touched">
-                            El campo es necesario
+                            Ingrese un usuario
                         </span>
+                        <span class="text-danger" *ngIf="formulariologueo.controls.usuario.errors?.minlength && formulariologueo.controls.usuario.touched">
+                            Nombre de usuario muy corto
+                        </span>
+                        <!-- <span class="text-danger" *ngIf="formulariologueo.controls.usuario.errors?.pattern && formulariologueo.controls.usuario.touched">
+                            Solo alfanumericos, minimo un numero
+                        </span> -->
                     </div>
                     <div class="input-clave">
                         <label for="usu" class="d-block">Contraseña</label>
                         <input type="password" formControlName="clave">
-                        <span class="text-danger" *ngIf="formulariologueo.controls.clave.errors?.required && formulariologueo.controls.usuario.touched">
+                        <span class="text-danger" *ngIf="formulariologueo.controls.clave.errors?.required && formulariologueo.controls.clave.touched">
                             Ingrese una contraseña
                         </span>
+                        <span class="text-danger" *ngIf="formulariologueo.controls.clave.errors?.minlength && formulariologueo.controls.clave.touched">
+                            Contraseña muy corta
+                        </span>
+                        
                     </div>
-                <br><br><br><br><br>
-                <div class="boton-container d-flex justify-content-center align-items-center">
-                    <button type="submit" class="button rounded-pill">INGRESAR</button>
-                    <div class="spinner-border text-warning ms-2" role="status">
-                        <span class="visually-hidden">Loading...</span>
+                    <div>
+                        <span class="text-danger ts-2 mt-2">{{msg}}</span>
                     </div>
-                </div>
-            </form>
+                    <br><br><br><br>
+                    <div class="boton-container d-flex justify-content-center align-items-center">
+                        <button type="submit" class="button rounded-pill">INGRESAR</button>
+                        <div *ngIf="isLoading" class="spinner-border text-warning ms-2" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

@@ -1,0 +1,22 @@
+
+
+<div class="contenedor" style="background-color: rgba(255, 255, 255, 0.527);">
+    <div class="row p-3">
+        <div class="col-2">
+            <img src="/assets/imgs/Logo.svg" alt="">
+            <div class="admin-list">
+                <a class="admin-item" [routerLink]="['producto']">Productos</a>
+                <a class="admin-item" [routerLink]="['categoria']">Categorias</a>
+                <a class="admin-item" [routerLink]="['marca']">Marca</a>
+                <a *ngIf="rol=='ADMIN'" class="admin-item" [routerLink]="['usuario']">Usuarios</a>
+            </div>
+        </div>
+        <div class="col-10">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+
+
+

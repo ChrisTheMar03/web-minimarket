@@ -1,0 +1,13 @@
+.add-categoria{
+    position: absolute;
+    right: 0;
+    width: 450px;
+    display: none;
+    top: 0;
+    height: 100%;
+    background-color: white;
+}
+
+.mostrar{
+    display: block;
+}

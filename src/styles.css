@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-:root{
-    --color-amarillo:#FFCD38;
+body{
+    background-color: rgb(235, 231, 231);
+    font-family: 'Pangolin', cursive;
 }

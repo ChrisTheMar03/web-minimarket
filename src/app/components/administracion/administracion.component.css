@@ -1,0 +1,26 @@
+.contenedor{
+    margin: 16px 16px;
+}
+
+.admin-list{
+    /* background-color: lightcoral; */
+}
+
+.admin-item:first-child{
+    margin-top: 16px;
+}
+.admin-item{
+    display: block;
+    padding: 8px 10px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #333;
+    cursor: default;
+}
+
+.admin-item:hover{
+    background-color: #333;
+    color: white;
+    border-left: 8px solid gray;
+}
+

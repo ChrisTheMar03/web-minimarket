@@ -11,6 +11,7 @@
 .login-container{
     padding: 16px 24px;
     max-width: 450px;
+    margin: 0 auto;
 }
 
 .login-container h1{
@@ -34,11 +35,12 @@ label{
 
 input{
     width: 100%;
-    outline: 0;
-    border: 0;
-    border-bottom: 1px solid #00000067;
+
+    /* border-bottom: 1px solid #00000067; */
     font-size: 1.2rem;
     padding: 5px 8px;
+
+
 }
 
 .boton-container{
@@ -52,7 +54,7 @@ input{
     border: 0;
     padding: 10px 34px;
     background-color: #FFCD38;
-    color: white;
+    color: black;
     font-size: 1.1rem;
     cursor: pointer;
 }

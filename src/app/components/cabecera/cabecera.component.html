@@ -2,34 +2,37 @@
 <header>
     <nav class="navegador">
         <div class="menu-logo">
-            <img width="40px" class="burguer" id="burguer" src="/assets/imgs/menu-burger (2).svg" alt="">
-            <img src="/assets/imgs/Logo.svg" id="burguer" class="logo" alt="">
-            <!-- <div class="burguer-items" id="burguer-items">
-                <div class="option1">
-                    <a href="#"><img src=""  alt=""> Text</a>
-                </div>
-                <div class="option2">
-                    <a href="#"><img src="" alt=""> Text</a>
-                </div>
-                <div class="option3">
-                    <a href="#"><img src="" alt=""> Text</a>
-                </div>
-                <div class="option4"> 
-                    <a href="#"><img src="" alt=""> Text</a>
-                </div>
-            </div> -->
+            <img width="40px" class="burguer" id="burguer" (click)="mostrarOpciones()" src="/assets/imgs/menu-burger (2).svg" alt="">
+            <img [routerLink]="['/principal']" title="Ir a Inicio" src="/assets/imgs/Logo.svg" style="cursor: pointer;" id="burguer" class="logo" alt="">
+        </div>
+        <div class="burguer-options" id="burguer-items" #burguer>
+            <div class="burguer-cabecera">
+                <img src="/assets/imgs/Logo.svg" class="burguer-img" width="100%" alt="">
+            </div>
+            <hr>
+            <ul class="burguer-list">
+                    <li class="burguer-list-item rounded"><img src="/assets/imgs/dashboard.svg" width="15px" alt=""><a [routerLink]="['/procesos/dashboard']">Dashboard</a></li>
+                <li class="burguer-list-item rounded"><img src="/assets/imgs/group.svg" width="15px" alt=""><a [routerLink]="['/procesos/administracion']">Administracion</a></li>
+                <!-- <li class="burguer-list-item rounded"><img src="/assets/imgs/inventory.svg" width="15px" alt=""><a [routerLink]="['/procesos/inventario']">Inventario</a></li> -->
+                <li class="burguer-list-item rounded"><img src="/assets/imgs/ventas.svg" width="15px" alt=""><a [routerLink]="['/procesos/venta']">Ventas</a></li>
+                <li class="burguer-list-item rounded"><img src="/assets/imgs/reportes.svg" width="15px" alt=""><a [routerLink]="['/procesos/reporte']">Reportes</a></li>
+                <li class="burguer-list-item rounded"><img src="/assets/imgs/settings.svg" width="15px" alt=""><a [routerLink]="['/procesos']">Ajustes</a></li>
+            </ul>
+            <div class="burguer-close">
+                <button class="btn btn-outline-secondary" (click)="cerrarBurguer()"><img src="/assets/imgs/arrow.svg" alt=""></button>
+            </div>
         </div>
         <div class="menu-buscador">
             <label for="busqueda"><img width="35px" src="/assets/imgs/search.svg" alt=""><input id="busqueda" type="text" placeholder="Busqueda Avanzada"></label>
         </div>
         <div class="menu-perfil">
-            <span>Administrador</span>
             <div class="perfil-imagen">
                 <img id="user-img" src="/assets/imgs/user-img.png" (click)="togleMenu()" alt="">
             </div>
+            <span>{{ tipo }}</span>
             <div class="items oculto" #useroption id="user-option">
                 <a href="#">Mi perfil</a>
-                <a routerLink="">Cerrar Sesion</a>
+                <a routerLink="" (click)="cerrarSesion()">Cerrar Sesion</a>
             </div>
         </div>
     </nav>
