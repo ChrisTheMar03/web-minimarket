@@ -11,3 +11,10 @@
 .mostrar{
     display: block;
 }
+
+.cuadro{
+    display: flex;
+    width: 33.3%;
+    flex-wrap: wrap;
+
+}

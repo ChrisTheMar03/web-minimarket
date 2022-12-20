@@ -15,7 +15,9 @@ export class CabeceraComponent implements OnInit {
   @ViewChild("useroption") useroption:ElementRef
   @ViewChild("burguer") burguer:ElementRef
 
-  constructor(private renderer:Renderer2) { }
+  constructor(private renderer:Renderer2) {
+    this.tipo="ADMIN"
+   }
 
   ngOnInit(): void {
     this.cargarRol()
@@ -47,5 +49,7 @@ export class CabeceraComponent implements OnInit {
     let rol=JSON.parse(localStorage.getItem("usuario")).rol.nombre
     this.tipo=rol
   }
+
+  
 
 }

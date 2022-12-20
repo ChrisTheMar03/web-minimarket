@@ -14,6 +14,7 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Marca</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Precio</th>
                     <th scope="col">Stock</th>
@@ -22,20 +23,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td><button class="btn btn-outline-warning">Actualizar</button></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@mdo</td>
+                  <tr *ngFor="let pr of productos">
+                    <th scope="row">{{pr.idPro}}</th>
+                    <td>{{ pr.idMarca.nombre }}</td>
+                    <td>{{ pr.nombre }}</td>
+                    <td>{{ pr.precio }}</td>
+                    <td>{{ pr.stock }}</td>
+                    <td>{{ pr.estado }}</td>
                     <td><button class="btn btn-outline-warning">Actualizar</button></td>
                   </tr>
                 </tbody>
@@ -53,14 +47,14 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="">
+            <form [formGroup]="formRegistro" (ngSubmit)="registroEvent()">
                     <div class="mb-3">
                       <label for="nombre" class="form-label">Nombre</label>
                       <input type="text" class="form-control" id="nombre" formControlName="nombre" >
                     </div>
                     <div class="mb-3">
                         <label for="precio" class="form-label">Precio</label>
-                        <input type="text" class="form-control" id="precio" formControlName="precio" >
+                        <input type="number" class="form-control" id="precio" formControlName="precio" >
                     </div>
                     <div class="mb-3">
                         <label for="stock" class="form-label">Stock</label>
@@ -71,28 +65,23 @@
                         <input type="text" class="form-control" id="imagen" formControlName="imagen" >
                     </div>
                     <div class="mb-3">
-                        <select class="form-select mb-3">
-                            <option selected>Categoria</option>
-                            <option value="1">cat1</option>
-                            <option value="2">cat2</option>
-                            <option value="3">cat3</option>
+                        <select class="form-select mb-3"  (change)="capturarCategoria($event)" formControlName="idCat">
+                            <option value="{{cat.idCat}}" *ngFor="let cat of categorias">{{cat.nombre}}</option>
+                            
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <select class="form-select mb-3">
-                            <option selected>Marca</option>
-                            <option value="1">m1</option>
-                            <option value="2">m2</option>
-                            <option value="3">m3</option>
+                    <div class="mb-3"> 
+                        <select class="form-select mb-3" (change)="capturarMarca($event)" formControlName="idMarca" >
+                            <option  value="{{ mar.idMarca }}" *ngFor="let mar of marcas" >{{ mar.nombre }}</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="estado" class="form-label">Estado</label>
-                        <input type="number" class="form-control" id="estado" max="1" min="0">
+                        <input type="number" class="form-control" id="estado" max="1" min="0" formControlName="estado" >
                     </div>
                     
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary">Guardar</button>
+                        <button type="submit" class="btn btn-secondary" [disabled]="formRegistro.valid!=true">Guardar</button>
                     </div>      
             </form>
         </div>

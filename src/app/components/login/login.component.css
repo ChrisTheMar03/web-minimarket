@@ -1,3 +1,8 @@
+.contenedor{
+    background: rgb(175,182,177);
+    background: linear-gradient(0deg, rgba(175,182,177,1) 0%, rgba(255,254,250,1) 100%);
+}
+
 .login-container{
     height: 100vh;
 }
@@ -19,8 +24,7 @@
     text-transform: uppercase;
     font-weight: bold;
     color: #333;
-    padding: 0.8rem 0;
-    border-bottom: 2px solid #FFCD38;
+    
 }
 
 .input-usu{
@@ -28,7 +32,7 @@
 }
 
 label{
-    color:#00000067;
+    color:#333;
     text-transform: uppercase;
     font-weight: bold;
 }
@@ -37,9 +41,17 @@ input{
     width: 100%;
 
     /* border-bottom: 1px solid #00000067; */
-    font-size: 1.2rem;
-    padding: 5px 8px;
+    /* font-size: 1.2rem;
+    padding: 5px 8px; */
 
+    /* width: 90%; */
+ background-color: #f3f3f4;
+ border: none;
+ padding: 10px 20px;
+ border-radius: 10px;
+ outline: none;
+ font-size: 14pt;
+ transition: background-color 0.2s, border 0.2s, box-shadow 0.2s;
 
 }
 
@@ -53,8 +65,8 @@ input{
     font-weight: bold;
     border: 0;
     padding: 10px 34px;
-    background-color: #FFCD38;
-    color: black;
+    background-color: #333;
+    color: white;
     font-size: 1.1rem;
     cursor: pointer;
 }
@@ -65,4 +77,13 @@ input{
 
 span{
     font-size: 0.8rem;
+}
+
+.img-logo{
+    margin-top: 16px;
+    transition: 0.6s all;
+}
+
+.img-logo:hover{
+    transform: rotate(180deg);
 }

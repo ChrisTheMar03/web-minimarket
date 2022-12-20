@@ -1,1 +1,201 @@
-<h3>Gestion de Usuario</h3>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#usuariomodal">Nuevo Usuario</button>
+        </div>
+        <div class="col-12 mt-3">
+            <h4>Categorias</h4>
+        </div>
+        <div class="col-12">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Password</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usu of usuarios">
+                        <td>{{usu.username}}</td>
+                        <td>{{usu.nombre}}</td>
+                        <td>{{usu.email}}</td>
+                        <td>{{usu.idRol.nombre}}</td>
+                        <td>********</td>
+                        <td><button class="btn" (click)="obtenerDatos(usu)" data-bs-toggle="modal" data-bs-target="#updatemodal" >Actualizar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="usuariomodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Usuario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="formusuario" (ngSubmit)="enviarDatos()" >
+            <div class="modal-body">
+
+                <div class="form-group mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" formControlName="nombre">
+                    <span class="text-danger" *ngIf="formusuario.controls.nombre.errors?.required && formusuario.controls.nombre.touched">
+                        Campo nombre necesario
+                    </span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="username" class="form-label" >Username</label>
+                    <input type="text" id="username" name="username" class="form-control" formControlName="username">
+                    <span class="text-danger" *ngIf="formusuario.controls.username.errors?.required && formusuario.controls.username.touched">
+                        Campo username necesario
+                    </span>
+                    <span class="text-danger" *ngIf="formusuario.controls.username.errors?.minlength && formusuario.controls.username.touched">
+                        Campo username corto, debe ser menor mayor a 5
+                    </span>
+                    <!-- <span class="text-danger" *ngIf="formusuario.controls.username.errors?.verificarNombre && formusuario.controls.username.touched">
+                        Nombre de Usuario en uso
+                    </span> -->
+                </div>
+                <div class="form-group mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" formControlName="email">
+                    <span class="text-danger" *ngIf="formusuario.controls.email.errors?.required && formusuario.controls.email.touched">
+                        Campo Email necesario
+                    </span>
+                    <span class="text-danger" *ngIf="formusuario.controls.email.errors?.email && formusuario.controls.email.touched">
+                        Campo Email no valido
+                    </span>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" id="password" name="password" class="form-control" formControlName="password">
+                    <span class="text-danger" *ngIf="formusuario.controls.password.errors?.required && formusuario.controls.password.touched">
+                        Campo contraseña necesario
+                    </span>
+                    <span class="text-danger" *ngIf="formusuario.controls.password.errors?.minlength && formusuario.controls.password.touched">
+                        Campo username corto, debe ser menor mayor a 7
+                    </span>
+                </div>
+                <div class="">
+                    <div class="row">
+                        <div class="col-12">
+                            Rol
+                        </div>
+                        <div class="col-6">
+                            <select class="form-select mb-3" formControlName="idRol" name="idRol" (change)="cambioRol($event)" >
+                                <option *ngFor="let mar of roles" value="{{ mar.id }}" >{{ mar.nombre }}</option>
+                            </select>
+                            <span class="text-danger" *ngIf="formusuario.controls.idRol.errors?.required && formusuario.controls.idRol.touched">
+                                Seleccione un Tipo de rol
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" [disabled]="!formusuario.valid">Guardar</button>
+                </div>
+            </form>
+
+        
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- Modal update -->
+  <div class="modal fade" id="updatemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="formupdate" (ngSubmit)="updateDatos()" >
+            <div class="modal-body">
+                <div class="form-group mb-3">
+                    <label for="id" class="form-label">Nombre</label>
+                    <input type="number" readonly id="id" name="id" class="form-control" formControlName="id">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" formControlName="nombre">
+                    <span class="text-danger" *ngIf="formusuario.controls.nombre.errors?.required && formusuario.controls.nombre.touched">
+                        Campo nombre necesario
+                    </span>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="username" class="form-label" >Username</label>
+                    <input type="text" id="username" name="username" class="form-control" formControlName="username">
+                    <span class="text-danger" *ngIf="formusuario.controls.username.errors?.required && formusuario.controls.username.touched">
+                        Campo username necesario
+                    </span>
+                    <span class="text-danger" *ngIf="formusuario.controls.username.errors?.minlength && formusuario.controls.username.touched">
+                        Campo username corto, debe ser menor mayor a 5
+                    </span>
+                    <!-- <span class="text-danger" *ngIf="formusuario.controls.username.errors?.verificarNombre && formusuario.controls.username.touched">
+                        Nombre de Usuario en uso
+                    </span> -->
+                </div>
+                <div class="form-group mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" formControlName="email">
+                    <span class="text-danger" *ngIf="formusuario.controls.email.errors?.required && formusuario.controls.email.touched">
+                        Campo Email necesario
+                    </span>
+                    <span class="text-danger" *ngIf="formusuario.controls.email.errors?.email && formusuario.controls.email.touched">
+                        Campo Email no valido
+                    </span>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" id="password" name="password" class="form-control" formControlName="password">
+                    <span class="text-danger" *ngIf="formusuario.controls.password.errors?.required && formusuario.controls.password.touched">
+                        Campo contraseña necesario
+                    </span>
+                    <span class="text-danger" *ngIf="formusuario.controls.password.errors?.minlength && formusuario.controls.password.touched">
+                        Campo username corto, debe ser menor mayor a 7
+                    </span>
+                </div>
+                <div class="">
+                    <div class="row">
+                        <div class="col-12">
+                            Rol
+                        </div>
+                        <div class="col-6">
+                            <select class="form-select mb-3" formControlName="idRol" name="idRol" (change)="cambioRol($event)" >
+                                <option *ngFor="let mar of roles" value="{{ mar.id }}" >{{ mar.nombre }}</option>
+                            </select>
+                            <span class="text-danger" *ngIf="formusuario.controls.idRol.errors?.required && formusuario.controls.idRol.touched">
+                                Seleccione un Tipo de rol
+                            </span>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-outline-warning">Actualizar</button>
+            </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>

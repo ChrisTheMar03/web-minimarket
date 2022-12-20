@@ -25,3 +25,6 @@
 .card:hover .proceso-title{
     color: #333;
 }
+.mouse{
+    cursor: pointer;
+}

@@ -2,7 +2,7 @@
 <header>
     <nav class="navegador">
         <div class="menu-logo">
-            <img width="40px" class="burguer" id="burguer" (click)="mostrarOpciones()" src="/assets/imgs/menu-burger (2).svg" alt="">
+            <img *ngIf="tipo == 'ADMIN'" width="40px" class="burguer" id="burguer" (click)="mostrarOpciones()" src="/assets/imgs/menu-burger (2).svg" alt="">
             <img [routerLink]="['/principal']" title="Ir a Inicio" src="/assets/imgs/Logo.svg" style="cursor: pointer;" id="burguer" class="logo" alt="">
         </div>
         <div class="burguer-options" id="burguer-items" #burguer>

@@ -23,4 +23,12 @@ export class UsuarioService {
     }
   }
 
+  listar():Promise<Usuario[]>{
+    return this.http.get<Usuario[]>(this.url).toPromise()
+  }
+
+  agregar(usuario:Usuario):Promise<number>{
+    return this.http.post<number>(this.url,usuario).toPromise()
+  }
+
 }

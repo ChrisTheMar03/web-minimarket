@@ -56,11 +56,13 @@
                     <img class="img-venta" src="/assets/imgs/cart-shop.svg" width="130px" alt="">
                 </div>
             </div>
-            <div class="card rounded" style="width: 40%;">
-                <div class="card-body text-center py-5 img-container" [routerLink]="['/procesos']" style="cursor: pointer;">
-                    <img class="img-ajustes" src="/assets/imgs/configblack.svg" width="130px" alt="">
+            
+                <div *ngIf="rol == 'ADMIN'" class="card rounded" style="width: 40%;">
+                    <div class="card-body text-center py-5 img-container" [routerLink]="['/procesos']" style="cursor: pointer;">
+                        <img class="img-ajustes" src="/assets/imgs/configblack.svg" width="130px" alt="">
+                    </div>
                 </div>
-            </div>
+            
         </div>
     </div>
 </ng-template>
