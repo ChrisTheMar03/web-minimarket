@@ -10,7 +10,6 @@ import { PrincipalComponent } from './components/principal/principal.component';
 import { CabeceraComponent } from './components/cabecera/cabecera.component';
 import { AdministracionComponent } from './components/administracion/administracion.component';
 import { CargaComponent } from './components/carga/carga.component';
-import { InventarioComponent } from './components/inventario/inventario.component';
 import { VentaComponent } from './components/venta/venta.component';
 import { ReporteComponent } from './components/reporte/reporte.component';
 import { ProcesosComponent } from './components/procesos/procesos.component';
@@ -20,6 +19,9 @@ import { MarcasComponent } from './components/marcas/marcas.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ShopComponent } from './components/shop/shop.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
+import { DetailventaComponent } from './components/detailventa/detailventa.component';
+import { PagoComponent } from './components/pago/pago.component';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,6 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
     CabeceraComponent,
     AdministracionComponent,
     CargaComponent,
-    InventarioComponent,
     VentaComponent,
     ReporteComponent,
     ProcesosComponent,
@@ -38,7 +39,9 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
     MarcasComponent,
     DashboardComponent,
     ShopComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    DetailventaComponent,
+    PagoComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,7 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

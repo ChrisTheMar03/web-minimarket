@@ -94,8 +94,17 @@ export class UsuarioComponent implements OnInit {
 
   //Update
   updateDatos(){
-    console.log(this.formupdate.value);
-    
+    const usu= this.formupdate.value
+    const usuario = new Usuario(usu.id,usu.email,usu.nombre,usu.password,usu.username,new Roles(usu.idRol))
+    // console.log(usuario);
+    this.usuarioService.agregar(usuario)
+      .then((res)=>{
+        if(res!=0){
+          alert("Usuario Actualizado")
+        }else{
+          console.log("Usuario no se puedo actualizar");
+        }
+      })
   }
 
 

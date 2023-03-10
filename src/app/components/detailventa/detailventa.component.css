@@ -1,0 +1,14 @@
+.btn-compra{
+    background-color: #87AAAA;
+    border-color: #87AAAA;
+}
+
+.btn-compra:hover{
+    opacity: 0.9;
+}
+
+.btn-compra:active{
+    transform: scale(0.98);
+    background-color: #87AAAA;
+    border-color: #87AAAA;
+}

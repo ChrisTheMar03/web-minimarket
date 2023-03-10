@@ -1,5 +1,5 @@
 .add-categoria{
-    position: absolute;
+    position: fixed;
     right: 0;
     width: 450px;
     display: none;

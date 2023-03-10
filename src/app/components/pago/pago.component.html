@@ -1,0 +1,101 @@
+
+
+<div class="d-flex justify-content-between" style="background-color: #333;color: white;">
+    <h2 class="p-4 ps-5 fw-bold">Metodo de Pago</h2>
+    <div class=" d-flex justify-content-center align-items-center ">
+        <button class="btn btn-outline-light me-4" type="button" [routerLink]="['/shop']" >Otro Producto</button>
+        <button class="btn btn-outline-danger me-4" (click)="generarBoleta()" >Generar Boleta</button>
+            
+        <a class="btn btn-outline-warning me-4" href="https://api-seguridad.sunat.gob.pe/v1/clientessol/4f3b88b3-d9d6-402a-b85d-6a0bc857746a/oauth2/loginMenuSol?originalUrl=https://e-menu.sunat.gob.pe/cl-ti-itmenu/AutenticaMenuInternet.htm&state=rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAADdAAEZXhlY3B0AAZwYXJhbXN0AEsqJiomL2NsLXRpLWl0bWVudS9NZW51SW50ZXJuZXQuaHRtJmI2NGQyNmE4YjVhZjA5MTkyM2IyM2I2NDA3YTFjMWRiNDFlNzMzYTZ0AANleGVweA==" target="_blank">Generar Factura</a>
+
+    </div>
+</div>
+    
+<div class="container mt-4 ">
+    <div class="row">
+        <div class="col-4">
+            <div class="card" style="background-color: #333;">
+                <div class="card-header alert alert-secondary">
+                    <h2 style="color: #87AAAA;margin-bottom: 0;">Pedido Actual</h2>
+                </div>
+                <div class="card-body">
+                    <div class="" *ngFor="let dv of dtventa">
+                        <div class=" d-flex justify-content-between ">
+                            <p class="fw-bold text-light fs-6">{{dv.idPro.nombre}}</p>
+                            <p class="text-light fs-6">{{dv.cantidad}}</p>
+                        </div>
+                        <div class="text-end text-light fs-5">
+                            S/. {{utils.formatearPrecio(dv.idPro.precio)}}
+                        </div>
+                        <hr class="text-light">
+                    </div>
+                    <div class=" d-flex justify-content-between align-items-center">
+                        <p class="fs-3 fw-bold text-light">Total</p>
+                        <p class="fs-3 fw-bold text-light">S/.{{utils.formatearPrecio(montoTotal)}}</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-8" style="position: relative;">
+            <img src="/assets/imgs/yapepj.png" class="img-yape" data-bs-toggle="modal" data-bs-target="#yapemodal" alt="yape">
+
+            <div class="d-flex justify-content-start">
+                <h3 class="mb-3" style="border-bottom: 2px solid #333;">Pago Efectivo</h3>
+                <img class="ms-2" src="https://cdn-icons-png.flaticon.com/512/1077/1077976.png" height="30px" alt="">
+            </div>
+            
+            <div class="pago-container">
+                <div class="pago">
+                    <div class="pago-input d-flex flex-row justify-content-around">
+                        <div class="pago-total d-flex flex-column justify-content-center align-items-center">
+                            <label for="ptotal" class="fw-bold">Total</label>
+                            <input type="text" class="fs-2 py-3" style="border: 2px solid #87AAAA; position: relative;width: 200px;text-align: center;" id="ptotal" [(ngModel)]="montoTotal" readonly>
+                        </div>
+                        <div class="pago-cliente d-flex flex-column justify-content-center align-items-center">
+                            <label for="pmonto" class="fw-bold">Monto</label>
+                            <input id="pmonto" class="fs-2 py-3" [placeholder]="montoTotal" #monto min="{{montoTotal}}" [(ngModel)]="pagoCliente" type="number" style="border: 2px solid #87AAAA;; position: relative;width: 200px;text-align: center;">
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <button class="btn btn-secondary w-50" (click)="obtenerCambio(monto)">Cobrar</button>
+                    </div>
+
+                    <div class="mt-4 text-end">
+                        <h2 class="text-end fs-2 p-2 rounded guelto">S/. {{utils.formatearPrecio(cambio)}}</h2>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="generar-boleta mt-4 text-start mb-4">
+                <button class="btn btn-danger py-3 px-5 btn-compra" (click)="finalizarCompra()" >FINALIZAR COMPRA</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<footer style="background-color: #333; height: 100px;display: flex;justify-content: center;align-items: center;color: white;margin-top: 50px;">
+    &copy; Derechos Reservador - 2023
+</footer>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="yapemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div> -->
+        <div class="modal-body text-center" >
+          <img width="70%" src="https://borealtech.com/wp-content/uploads/2018/10/codigo-qr-1024x1024-1.jpg" alt="">
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div> -->
+      </div>
+    </div>
+  </div>

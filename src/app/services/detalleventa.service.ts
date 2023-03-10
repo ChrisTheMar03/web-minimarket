@@ -13,8 +13,25 @@ export class DetalleventaService {
     this.url="http://localhost:9090/tienda/detalleventa"
   }
 
-  agregarDetalleVenta(detalleventa:DetalleVentas):void{
-    this.http.post<void>(this.url,detalleventa)
+  agregarDetalleVenta(detalleventa:DetalleVentas):Promise<number>{
+    try {
+      return this.http.post<number>(this.url,detalleventa).toPromise() 
+    } catch (error) {
+      console.log(error);
+      return null
+    }
+  }
+
+  listar():Promise<DetalleVentas[]>{
+    return this.http.get<DetalleVentas[]>(this.url).toPromise()
+  }
+
+  listarXventa(id:number):Promise<DetalleVentas[]>{
+    return this.http.get<DetalleVentas[]>(`${this.url}/xventa/${id}`).toPromise()
+  }
+
+  eliminarDetalle(id:number):Promise<boolean>{
+    return this.http.delete<boolean>(this.url+"/"+id).toPromise()
   }
 
 }

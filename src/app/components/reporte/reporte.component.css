@@ -1,0 +1,35 @@
+.contenedor{
+    margin: 16px 16px;
+
+}
+
+.nav{
+    width: 100%;
+    background-color: rgb(121, 121, 121);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.nav-item{
+    background-color: rgba(219, 219, 219, 0.705);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-item > a{
+    box-sizing: border-box;
+    padding: 8px;
+}
+
+.nav-item:hover{
+    background-color: rgba(202, 203, 204, 0.925);
+}
+
+.reporte-container{
+    min-height: 500px;
+}
+

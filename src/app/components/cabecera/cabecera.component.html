@@ -14,24 +14,33 @@
                     <li class="burguer-list-item rounded"><img src="/assets/imgs/dashboard.svg" width="15px" alt=""><a [routerLink]="['/procesos/dashboard']">Dashboard</a></li>
                 <li class="burguer-list-item rounded"><img src="/assets/imgs/group.svg" width="15px" alt=""><a [routerLink]="['/procesos/administracion']">Administracion</a></li>
                 <!-- <li class="burguer-list-item rounded"><img src="/assets/imgs/inventory.svg" width="15px" alt=""><a [routerLink]="['/procesos/inventario']">Inventario</a></li> -->
-                <li class="burguer-list-item rounded"><img src="/assets/imgs/ventas.svg" width="15px" alt=""><a [routerLink]="['/procesos/venta']">Ventas</a></li>
+                <li class="burguer-list-item rounded"><img src="/assets/imgs/ventas.svg" width="15px" alt=""><a [routerLink]="['/shop']">Ventas</a></li>
                 <li class="burguer-list-item rounded"><img src="/assets/imgs/reportes.svg" width="15px" alt=""><a [routerLink]="['/procesos/reporte']">Reportes</a></li>
-                <li class="burguer-list-item rounded"><img src="/assets/imgs/settings.svg" width="15px" alt=""><a [routerLink]="['/procesos']">Ajustes</a></li>
+                <!-- <li class="burguer-list-item rounded"><img src="/assets/imgs/settings.svg" width="15px" alt=""><a [routerLink]="['/procesos']">Ajustes</a></li> -->
             </ul>
             <div class="burguer-close">
-                <button class="btn btn-outline-secondary" (click)="cerrarBurguer()"><img src="/assets/imgs/arrow.svg" alt=""></button>
+                <button class="btn btn-outline-light" (click)="cerrarBurguer()"><img src="/assets/imgs/arrow.svg" alt=""></button>
             </div>
         </div>
         <div class="menu-buscador">
-            <label for="busqueda"><img width="35px" src="/assets/imgs/search.svg" alt=""><input id="busqueda" type="text" placeholder="Busqueda Avanzada"></label>
+            <label for="busqueda" class="label-buscar"><img width="35px" src="/assets/imgs/search.svg" style="position: relative;filter: invert(100%);" alt="">
+                <input id="busqueda" class="busqueda-comand" type="text" placeholder="Busqueda Avanzada. / para visualizar todos los comandos " (input)="busqueda($event)" >
+            </label>
+            <div class="fill-for">
+                <div *ngIf="busquedaRutas.length != 0">
+                    <div class="busqueda-for" *ngFor="let d of listaIter">
+                        <a class="busqueda-item" routerLink="/{{d.ruta}}" >{{d.nombre}}</a>
+                    </div>     
+                </div>
+            </div>
         </div>
         <div class="menu-perfil">
             <div class="perfil-imagen">
                 <img id="user-img" src="/assets/imgs/user-img.png" (click)="togleMenu()" alt="">
             </div>
-            <span>{{ tipo }}</span>
+            <span class="text-light">{{ tipo }}</span>
             <div class="items oculto" #useroption id="user-option">
-                <a href="#">Mi perfil</a>
+                <!-- <a href="#">Mi perfil</a> -->
                 <a routerLink="" (click)="cerrarSesion()">Cerrar Sesion</a>
             </div>
         </div>

@@ -1,0 +1,35 @@
+
+
+.btn-compra{
+    background-color: #87AAAA;
+    border-color: #87AAAA;
+}
+
+.btn-compra:hover{
+    opacity: 0.8;
+}
+
+.btn-compra:active{
+    transform: scale(0.98);
+    background-color: #87AAAA;
+    border-color: #87AAAA;
+}
+
+.guelto{
+    border:2px solid #87AAAA;
+    display: inline-block;
+    color: #333;
+}
+
+.img-yape{
+    position: absolute;
+    right: -80px;
+    width: 150px;
+    transition: 0.5s all;
+    cursor: pointer;
+}
+
+
+.img-yape:hover{
+    transform:rotateZ(20deg)
+}

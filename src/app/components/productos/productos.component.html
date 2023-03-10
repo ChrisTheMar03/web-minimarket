@@ -5,6 +5,7 @@
     <div class="row">
         <div class="col-12">
             <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addProducto">Nuevo Producto</button>
+            | <label style="background-attachment: fixed;" for="filtro">Buscar <input id="filtro" (input)="filtrarProducto($event)" type="text"></label>
         </div>
         <div class="col-12 mt-3">
             <h4>Productos</h4>
@@ -26,11 +27,11 @@
                   <tr *ngFor="let pr of productos">
                     <th scope="row">{{pr.idPro}}</th>
                     <td>{{ pr.idMarca.nombre }}</td>
-                    <td>{{ pr.nombre }}</td>
-                    <td>{{ pr.precio }}</td>
+                    <td id="nombres">{{ pr.nombre }}</td>
+                    <td>S/. {{ utils.formatearPrecio( pr.precio) }}</td>
                     <td>{{ pr.stock }}</td>
                     <td>{{ pr.estado }}</td>
-                    <td><button class="btn btn-outline-warning">Actualizar</button></td>
+                    <td><button class="btn" (click)="obtenerProductoUpdate(pr)" data-bs-toggle="modal" data-bs-target="#updateProducto" >Actualizar</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -51,33 +52,69 @@
                     <div class="mb-3">
                       <label for="nombre" class="form-label">Nombre</label>
                       <input type="text" class="form-control" id="nombre" formControlName="nombre" >
+                      <span class="text-danger" *ngIf="formRegistro.controls.nombre.errors?.required && formRegistro.controls.nombre.touched">
+                        Campo nombre necesario
+                    </span>
                     </div>
                     <div class="mb-3">
                         <label for="precio" class="form-label">Precio</label>
                         <input type="number" class="form-control" id="precio" formControlName="precio" >
+                        <span class="text-danger" *ngIf="formRegistro.controls.precio.errors?.required && formRegistro.controls.precio.touched">
+                          Campo precio necesario
+                        </span>
                     </div>
                     <div class="mb-3">
                         <label for="stock" class="form-label">Stock</label>
                         <input type="number" class="form-control" id="stock" formControlName="stock" >
+                        <span class="text-danger" *ngIf="formRegistro.controls.stock.errors?.required && formRegistro.controls.stock.touched">
+                          Campo stock necesario
+                        </span>
                     </div>
                     <div class="mb-3">
                         <label for="imagen" class="form-label">Url</label>
                         <input type="text" class="form-control" id="imagen" formControlName="imagen" >
+                        <span class="text-danger" *ngIf="formRegistro.controls.imagen.errors?.required && formRegistro.controls.imagen.touched">
+                          Campo imagen necesario
+                        </span>
                     </div>
                     <div class="mb-3">
-                        <select class="form-select mb-3"  (change)="capturarCategoria($event)" formControlName="idCat">
+                      <div class="row">
+                        <div class="col-4 d-flex align-items-center ">
+                          <h5 class="m-auto">Categoria:</h5>
+                        </div>
+                        <div class="col-8">
+                          <select class="form-select mb-3"  (change)="capturarCategoria($event)" formControlName="idCat">
                             <option value="{{cat.idCat}}" *ngFor="let cat of categorias">{{cat.nombre}}</option>
-                            
                         </select>
+                        <span class="text-danger" *ngIf="formRegistro.controls.idCat.errors?.required && formRegistro.controls.idCat.touched">
+                          Seleccione una Categoria
+                        </span>
+                        </div>
+                      </div>
+                        
                     </div>
-                    <div class="mb-3"> 
-                        <select class="form-select mb-3" (change)="capturarMarca($event)" formControlName="idMarca" >
+                    <div class="mb-3">
+                      <div class="row">
+                        <div class="col-4 d-flex align-items-center ">
+                          <h5 class="m-auto">Marca:</h5>
+                        </div>
+                        <div class="col-8">
+                          <select class="form-select mb-3" (change)="capturarMarca($event)" formControlName="idMarca" >
                             <option  value="{{ mar.idMarca }}" *ngFor="let mar of marcas" >{{ mar.nombre }}</option>
                         </select>
+                        <span class="text-danger" *ngIf="formRegistro.controls.idMarca.errors?.required && formRegistro.controls.idMarca.touched">
+                          Seleccione una Marca
+                        </span>
+                        </div>
+                      </div>
+                        
                     </div>
                     <div class="mb-3">
                         <label for="estado" class="form-label">Estado</label>
                         <input type="number" class="form-control" id="estado" max="1" min="0" formControlName="estado" >
+                        <span class="text-danger" *ngIf="formRegistro.controls.estado.errors?.required && formRegistro.controls.estado.touched">
+                          Indique el estado 1 - 0
+                        </span>
                     </div>
                     
                     <div class="modal-footer">
@@ -89,3 +126,98 @@
     </div>
   </div>
 
+
+  <!-- Modal -->
+<div class="modal fade" id="updateProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Actualizar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateProduct" (ngSubmit)="actualizarProducto()" >
+          
+          <div class="mb-3">
+            <label for="idpro" class="form-label">Codigo</label>
+            <input type="text" readonly class="form-control" id="idpro" formControlName="idPro" >
+          </div>
+          
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" formControlName="nombre" >
+            <span class="text-danger" *ngIf="updateProduct.controls.nombre.errors?.required && updateProduct.controls.nombre.touched">
+              Campo nombre necesario
+            </span>
+          </div>
+
+          <div class="mb-3">
+              <label for="precio" class="form-label">Precio</label>
+              <input type="number" class="form-control" id="precio" formControlName="precio" >
+              <span class="text-danger" *ngIf="updateProduct.controls.precio.errors?.required && updateProduct.controls.precio.touched">
+                Campo precio necesario
+              </span>
+          </div>
+          <div class="mb-3">
+              <label for="stock" class="form-label">Stock</label>
+              <input type="number" class="form-control" id="stock" formControlName="stock" >
+              <span class="text-danger" *ngIf="updateProduct.controls.stock.errors?.required && updateProduct.controls.stock.touched">
+                Campo stock necesario
+              </span>
+          </div>
+          <div class="mb-3">
+              <label for="imagen" class="form-label">Url</label>
+              <input type="text" class="form-control" id="imagen" formControlName="imagen" >
+              <span class="text-danger" *ngIf="updateProduct.controls.imagen.errors?.required && updateProduct.controls.imagen.touched">
+                Campo imagen necesario
+              </span>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-4 d-flex align-items-center ">
+                <h5 class="m-auto">Categoria:</h5>
+              </div>
+              <div class="col-8">
+                <select class="form-select mb-3"  (change)="capturarCategoriaUpdate($event)" formControlName="idCat">
+                  <option value="{{cat.idCat}}" *ngFor="let cat of categorias">{{cat.nombre}}</option>
+              </select>
+              <span class="text-danger" *ngIf="updateProduct.controls.idCat.errors?.required && updateProduct.controls.idCat.touched">
+                Seleccione una Categoria
+              </span>
+              </div>
+            </div>
+              
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-4 d-flex align-items-center ">
+                <h5 class="m-auto">Marca:</h5>
+              </div>
+              <div class="col-8">
+                <select class="form-select mb-3" (change)="capturarMarcaUpdate($event)" formControlName="idMarca" >
+                  <option  value="{{ mar.idMarca }}" *ngFor="let mar of marcas" >{{ mar.nombre }}</option>
+              </select>
+              <span class="text-danger" *ngIf="updateProduct.controls.idMarca.errors?.required && updateProduct.controls.idMarca.touched">
+                Seleccione una Marca
+              </span>
+              </div>
+            </div>
+              
+          </div>
+          <div class="mb-3">
+              <label for="estado" class="form-label">Estado</label>
+              <input type="text" class="form-control" id="estado" maxlength="2" minlength="1" formControlName="estado" >
+              <span class="text-danger" *ngIf="updateProduct.controls.estado.errors?.required && updateProduct.controls.estado.touched">
+                Indique el estado 1 - 0
+              </span>
+          </div>
+          
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary">Actualizar</button>
+          </div>   
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

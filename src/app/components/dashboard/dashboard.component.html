@@ -7,43 +7,136 @@
                 <div class="card-ventas-desc d-flex justify-content-between align-items-start">
                     <div class="card-ventas-data d-flex flex-column ">
                         <span class="card-ventas-title">Ventas realizadas</span>
-                        <span class="card-ventas-moneda">452.15</span>
+                        <span class="card-ventas-moneda fs-1" >{{ventasRealizadas}}</span>
                     </div>
                     <img src="/assets/imgs/dolar.svg" alt="">
                 </div>
-                <span class="card-ventas-porcentaje"><img src="/assets/imgs/arrowTop.svg" alt="">3.48</span>
-                <span style="margin-left: 16px;">Ventas al Mes</span>
+                <!-- <span class="card-ventas-porcentaje"><img src="/assets/imgs/arrowTop.svg" alt="">3.48</span>
+                <span style="margin-left: 16px;">Ventas al Mes</span> -->
             </div>
 
             <div class="cards-ingresos">
                 <div class="card-ventas-desc d-flex justify-content-between align-items-start">
                     <div class="card-ventas-data d-flex flex-column ">
-                        <span class="card-ventas-title">Ingresos</span>
-                        <span class="card-ventas-moneda">452.15</span>
+                        <span class="card-ventas-title">Total Ingresos</span>
+                        <span class="card-ventas-moneda fs-1">S/. {{utils.formatearPrecio( totalIngresos)}}</span>
                     </div>
                     <img src="/assets/imgs/dolar.svg" alt="">
                 </div>
-                <span class="card-ventas-porcentaje"><img src="/assets/imgs/arrowTop.svg" alt="">3.48</span>
-                <span style="margin-left: 16px;">Ingresos al Mes</span>
+                <!-- <span class="card-ventas-porcentaje"><img src="/assets/imgs/arrowTop.svg" alt="">3.48</span>
+                <span style="margin-left: 16px;">Ingresos al Mes</span> -->
             </div>
             <div class="cards-gastos">
                 <div class="card-ventas-desc d-flex justify-content-between align-items-start">
                     <div class="card-ventas-data d-flex flex-column ">
-                        <span class="card-ventas-title">Gastos</span>
-                        <span class="card-ventas-moneda">452.15</span>
+                        <span class="card-ventas-title">Total Productos</span>
+                        <span class="card-ventas-moneda fs-1">{{cantidadProductos}}</span>
                     </div>
                     <img src="/assets/imgs/dolar.svg" alt="">
                 </div>
-                <span class="card-ventas-porcentaje"><img src="/assets/imgs/arrowTop.svg" alt="">3.48</span>
-                <span style="margin-left: 16px;">Gastos al Mes</span>
+                <!-- <span class="card-ventas-porcentaje"><img src="/assets/imgs/arrowTop.svg" alt="">3.48</span>
+                <span style="margin-left: 16px;">Gastos al Mes</span> -->
             </div>
         </div>
         <div class="mt-5">
             <h3>Ventas Recientes</h3>
+            <hr>
+            <!-- <div class="mt-2 d-flex align-items-center justify-content-between">
+                <div class="">
+                    <label for="fecha">Buscar Venta por Fecha:</label>
+                    <input id="fecha" class="ms-3" type="date">
+                </div>
+                <div class="">
+                    <button class="btn btn-outline-success">Exportar Excel</button>
+                </div>
+            </div> -->
+            <div class="text-end">
+                <button class="btn btn-outline-success" [disabled]="true">Exportar Excel</button>
+            </div>
         </div>
-        <div class="col-12">
-
+        <div class="col-12 mt-3">
+            <table class="table">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>Codigo Venta</th>
+                        <th>Fecha</th>
+                        <th>Usuario</th>
+                        <th>Vista</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let v of ventas">
+                        <td>{{v.ventaId}}</td>
+                        <td>{{v.fecha}}</td>
+                        <td>{{v.id.nombre}}</td>
+                        <td><button style="border: 0;outline: 0;" data-bs-toggle="modal" data-bs-target="#detalleVenta" 
+                            (click)="visualizarDetalleVenta(v)" type="button">Visualizar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade modal-xl" id="detalleVenta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ ventaObtenida.fecha }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-6">
+                <h3>Productos Vendidos</h3> 
+                <hr>
+                <div style="height: 300px;overflow-y: auto;">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nombre Producto</th>
+                                <th>Imagen</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dv of detalleventas">
+                                <td>{{dv.idPro.nombre}}</td>
+                                <td><img [src]="dv.idPro.imagen" width="50px" alt=""></td>
+                                <td>{{ dv.cantidad }}</td>
+                                <td>S/. {{ dv.idPro.precio }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-6">
+                <h3>Especificaciones</h3>
+                <div class="alert alert-primary text-black text-uppercase">
+                    <ul>
+                        <li class="mt-3"><strong>Fecha de Venta:</strong> {{fechaVenta}}</li>
+                        <li class="mt-3"><strong>Usuario:</strong> {{usuarionombre}}</li>
+                        <li class="mt-3"><strong>Precio Total:</strong> S/. {{ utils.formatearPrecio( precioTotal)}}</li>
+                        <li class="mt-3"><strong>Cantidad Total:</strong> {{cantidadTotal}}</li>
+                    </ul>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer"  >
+            <button type="button" class="btn btn-outline-danger" [disabled]="true" >Generar Boleta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer style="background-color: #333; height: 100px;display: flex;justify-content: center;align-items: center;color: white;margin-top: 50px;">
+    &copy; Admin - Minimarket Gonzales
+</footer>
+
+
 

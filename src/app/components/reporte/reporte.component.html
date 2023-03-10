@@ -1,1 +1,241 @@
-<p>Gestion de reportes</p>
+
+<div class="contenedor" style="background-color: rgba(255, 255, 255, 0.527);">
+    <div class="p-3">
+        <div class="d-flex justify-content-start align-items-center">
+            <h3 class="me-2 my-0">Reporte:</h3>
+            <select class="form-select bg-ligth" name="reportes" style="width: 350px;" (change)="obtenerTipoReporte($event)"  >
+                <option value="0">Seleccionar</option>
+                <option value="1">Ventas</option>
+                <option value="2" [disabled]="true" >Inventario</option>
+                <option value="3" [disabled]="true" >Desempeño</option>
+            </select>
+        </div>
+        <hr>
+        <div class="reporte-container">
+                <div *ngIf="tipoReporte==0">
+                    <h5>Seleccione el reporte a consultar...</h5>
+                </div>
+                <div *ngIf="tipoReporte==1">
+                    <div class="row">
+                        <div class=" d-flex justify-content-start align-items-center ">
+                            <h4 class="me-2">Ventas realizadas por</h4>
+                            <select class="form-select bg-ligth" name="reportes" style="width: 150px;" (change)="obtenerVentasPor($event)"  >
+                                <option value="0">Seleccionar</option>
+                                <option value="1">Usuarios</option>
+                                <option value="2">Fecha</option>
+                            </select>
+                        </div>
+                        <div *ngIf="tipoVenta==0" class="col-6">
+                            
+                        </div>
+                        <div *ngIf="tipoVenta==1" class="p-3 col-6">
+                            <div class="">
+                                <div class="">
+                                    <label for="fecha">Nombre Usuario</label>
+                                    <input type="text" placeholder="Nombre de usuario..." id="nombre" class="ms-3" #nombre>
+                                    <!-- <select name="nombreusuario"[disabled]="true" class="form-select" style="width: 150px;" ><option value="0">Seleccionar</option></select> -->
+                                    <button class="btn btn-outline-secondary py-1 ms-2" (click)="obtenerNombre(nombre)" >Filtrar</button>
+                                </div>
+                                <div *ngIf="ventasSelectivas.length > 0;else noventas1">
+                                    <table class="table table-hover w-100">
+                                        <thead>
+                                            <tr>
+                                                <th>Codigo</th>
+                                                <th>Fecha</th>
+                                                <th>Usuario</th>
+                                                <th>Detalles</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let v of ventasSelectivas">
+                                                <td>{{v.ventaId}}</td>
+                                                <td>{{v.fecha}}</td>
+                                                <td>{{v.id.nombre}}</td>
+                                                <td><button class="btn py-1" (click)="verVenta(v.ventaId)">Ver</button></td>  
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="">
+                                        <p>Ventas Totales: {{ventasTotales}}</p>
+                                    </div>
+                                </div>
+                                <ng-template #noventas1>
+                                    <p class="text-secondary mt-3">Filtre por una nombre...</p>
+                                </ng-template>
+                            </div>
+                            <!-- <div class="col-6">
+                                <h4>Visualizacion...</h4>
+                                <div>
+                                    
+                                </div>
+                            </div> -->
+                        </div>
+                        <div *ngIf="tipoVenta==2" class="p-3 col-6">
+                            <div class="">
+                                <div class="">
+                                    <label for="fecha">Fecha</label>
+                                    <input type="date" id="fecha" class="ms-3" #fecha>
+                                    <button class="btn btn-outline-secondary py-1 ms-2" (click)="obtenerFecha(fecha)" >Filtrar</button>
+
+                                    <button style="position: relative;float: right;" class="btn btn-warning py-1 ms-1" data-bs-toggle="modal" data-bs-target="#busquedaavanzada">Avanzado</button>
+                                    
+                                </div>
+                                <div *ngIf="ventasSelectivas.length > 0;else noventas2">
+                                    <table class="table table-hover mt-2">
+                                        <thead>
+                                            <tr>
+                                                <th>Codigo</th>
+                                                <th>Usuario</th>
+                                                <th>Email</th>
+                                                <th>Detalles</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let v of ventasSelectivas">
+                                                <td>{{v.ventaId}}</td>
+                                                <td>{{v.id.nombre}}</td>
+                                                <td>{{v.id.email}}</td>
+                                                <td><button class="btn py-1" (click)="verVenta(v.ventaId)">Ver</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="">
+                                        <p>Ventas Totales: {{ventasTotales}}</p>
+                                    </div>
+                                </div>
+                                <ng-template #noventas2>
+                                    <p class="text-secondary mt-3">Filtre por una fecha...</p>
+                                </ng-template>
+                            </div>
+                        </div>
+                        <div class="p-3 col-6">
+                            <div *ngIf="detalleVenta.length!=0;else vista" >
+                                <table class="table table-hover" style="border: 0.6px solid #333;">
+                                    <thead class="text-light bg-secondary">
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <th>Categoria</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody> 
+                                        <tr *ngFor="let dv of detalleVenta">
+                                            <td>{{dv.idPro.nombre}}</td>
+                                            <td>{{dv.cantidad}}</td>
+                                            <td>S/. {{ utils.formatearPrecio( dv.idPro.precio)}}</td>
+                                            <td>{{dv.idPro.idCat.nombre}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div>
+                                    <p class="alert alert-secondary">Precio Total: S/. {{utils.formatearPrecio( precioTotal)}}</p>
+                                    <p class="alert alert-secondary">Cantidad de Productos: {{cantidadProductos}}</p>
+                                </div>
+                            </div>
+                            <ng-template #vista>
+                                <span></span>
+                            </ng-template>
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <p class="alert alert-secondary">Precio Total de Ventas: S/. {{ utils.formatearPrecio(precioTotalVentas)}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="tipoReporte==2">
+    
+                </div>
+                <div *ngIf="tipoReporte==3">
+    
+                </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Modal -->
+  <div class="modal modal-lg fade" id="busquedaavanzada" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #333;">
+          <h5 class="modal-title text-light" id="staticBackdropLabel"> Busqueda Avanzada por fecha </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="min-height: 500px;">
+          <div class="filtro">
+            <div>
+                <form (change)="obtenerValor($event)">
+                    <label for="semana" class="me-3"><input id="semana" type="radio" name="fecha"> Ultima Semana</label>
+                    <label for="mes" class="me-3"><input id="mes" type="radio" name="fecha"> Ultimo Mes</label>
+                    <!-- <label for="rango" class="me-3"><input type="radio" id="rango" name="fecha"> Rango de Fechas</label> -->
+                    <label for="personalizado" class="me-3"><input readonly type="radio" id="personalizado" name="fecha"> Personalizado</label>
+                </form>
+            </div>
+            <hr>
+            <div>
+                <div *ngIf="radioValue!='';else filter" >
+                    <div *ngIf="radioValue=='semana'" >
+                        <p class="my-0 mt-2 text-end"> <strong>{{semanaPasada}}</strong> hasta <strong>{{diActual}}</strong></p>
+                        <p class="my-1"><span class="fw-bold">Cantidad de Ventas:</span> {{cantVentasAvanzadas}}</p>
+                        <p class="my-1 mb-4"><span class="fw-bold">Total Precio de Ventas:</span> S/. {{utils.formatearPrecio( totalVentasAvanzado)}}</p>
+                    </div>
+                    <div *ngIf="radioValue=='mes'">
+                        <p class="text-end my-0 mt-2"> <strong>{{semanaPasada}}</strong> hasta <strong>{{diActual}}</strong></p>
+                        <p class="my-1"><span class="fw-bold">Cantidad de Ventas:</span> {{cantVentasAvanzadas}}</p>
+                        <p class="my-1 mb-4"><span class="fw-bold">Total Precio de Ventas:</span> S/. {{utils.formatearPrecio(totalVentasAvanzado)}}</p>
+                    </div>
+                    <div *ngIf="radioValue=='personalizado'">
+                        <div class="mb-2">
+                            <label for="fechaini">Fecha Inicial</label>
+                            <input type="date" id="fechaini" class="ms-3" #fecha1>
+                            <label for="fechafin" class="ms-3">Fecha Final</label>
+                            <input type="date" id="fechafin" class="ms-3" #fecha2>
+                            <button class="btn btn-outline-secondary py-1 ms-2" (click)="filtrarXfechasDobles(fecha1,fecha2)" >Filtrar</button>
+                        </div>
+                        <div *ngIf="ventasAvanzadas.length!=0">
+                            <p class="text-end my-0 mt-4"> <strong>{{semanaPasada}}</strong> hasta <strong>{{diActual}}</strong></p>
+                            <p class="my-1"><span class="fw-bold">Cantidad de Ventas:</span> {{cantVentasAvanzadas}}</p>
+                            <p class="my-1 mb-4"><span class="fw-bold">Total Precio de Ventas:</span> S/.{{utils.formatearPrecio(totalVentasAvanzado)}}</p>
+                        </div> 
+                        
+                    </div>
+                    <!-- <div *ngIf="radioValue=='personalizado'">
+                    
+                    </div> -->
+                    <div class="" *ngIf="ventasAvanzadas.length!=0;else noavanzados">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha</th>
+                                    <th>Ver</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dv of ventasAvanzadas">
+                                    <td>{{dv.ventaId}}</td>
+                                    <td>{{dv.id.nombre}}</td>
+                                    <td>{{dv.fecha}}</td>
+                                    <td><button type="button" [disabled]="true">Ver</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ng-template #noavanzados>
+                        <div>
+                            <span></span>
+                        </div>
+                    </ng-template>
+
+                </div>
+                <ng-template #filter>
+
+                </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -16,6 +16,7 @@
     letter-spacing: 1px;
     margin-top: 8px;
     color: rgba(194, 192, 192, 0.815);
+    text-transform: uppercase;
 }
 
 .card:hover .proceso-img{

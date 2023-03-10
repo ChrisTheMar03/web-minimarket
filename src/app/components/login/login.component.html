@@ -5,13 +5,14 @@
                 <!-- <img src="/assets/imgs/logo-login.png" height="100%" width="100%" alt=""> -->
             <!-- </div>
         </div> -->
+        <img src="https://cdn-icons-png.flaticon.com/512/9419/9419271.png" class="open" width="150px" alt="">
         <div class="col-12">
-            <div class="login-container d-flex flex-column justify-content-around">
-                <h1><img class="img-logo" src="/assets/imgs/Logo.svg" width="250px" alt=""></h1>
+            <div class="login-container d-flex flex-column justify-content-around ">
+                <h1><img class="img-logo" src="/assets/imgs/Logo.svg" width="100%" alt=""></h1>
                 <form [formGroup]="formulariologueo" (ngSubmit)="onSubmit()" class="login-credenciales">
                     <div class="input-usu">
                         <label for="usu" class="d-block" >Usuario</label>
-                        <input type="text" formControlName="usuario" >
+                        <input type="text" formControlName="usuario" class="formusu">
                         <span class="text-danger" *ngIf="formulariologueo.controls.usuario.errors?.required && formulariologueo.controls.usuario.touched">
                             Ingrese un usuario
                         </span>
@@ -24,7 +25,7 @@
                     </div>
                     <div class="input-clave">
                         <label for="usu" class="d-block">Contraseña</label>
-                        <input type="password" formControlName="clave">
+                        <input type="password" formControlName="clave" class="formusu">
                         <span class="text-danger" *ngIf="formulariologueo.controls.clave.errors?.required && formulariologueo.controls.clave.touched">
                             Ingrese una contraseña
                         </span>
@@ -39,7 +40,7 @@
                     <br><br><br><br>
                     <div class="boton-container d-flex justify-content-center align-items-center">
                         <button type="submit" class="button rounded-pill">INGRESAR</button>
-                        <div *ngIf="isLoading" class="spinner-border text-warning ms-2" role="status">
+                        <div *ngIf="isLoading" class="spinner-border text-secondary ms-2" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
                     </div>

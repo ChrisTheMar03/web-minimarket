@@ -12,20 +12,11 @@ div[class*="cards"]{
     padding: 12px;
 }
 
-div[class*="cards"]:first-child{
-    background-color: rgb(248, 28, 248);
-    box-shadow: 1px  5px 10px rgba(248, 28, 248, 0.568);
+div[class*="cards"]{
+    background-color: #87AAAA;
+    box-shadow: 1px  5px 10px rgba(209, 208, 209, 0.568);
 }
 
-div[class*="cards"]:last-child{
-    background-color: rgb(243, 255, 71);
-    box-shadow: 1px  5px 10px rgba(243, 255, 71, 0.582);
-}
-
-div[class*="cards"]:nth-child(2){
-    background-color: rgb(255, 67, 67);
-    box-shadow: 1px  5px 10px rgba(255, 67, 67, 0.555);
-}
 
 .card-ventas-title{
     opacity: 0.6;

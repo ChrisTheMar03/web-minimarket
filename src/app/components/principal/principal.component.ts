@@ -27,11 +27,11 @@ export class PrincipalComponent implements OnInit {
   }
 
   obtenerFechaActual(){
-    this.fecha=new Date().toLocaleDateString().toString()
+    this.fecha=new Date().toLocaleDateString()
   }
 
   obtenerRol(){
-    this.rol=JSON.parse(localStorage.getItem("usuario")).rol.nombre
+    this.rol=JSON.parse(localStorage.getItem("usuario")).idRol.nombre
     console.log(this.rol); 
   }
 

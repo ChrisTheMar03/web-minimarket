@@ -1,6 +1,7 @@
 .contenedor{
-    background: rgb(175,182,177);
-    background: linear-gradient(0deg, rgba(175,182,177,1) 0%, rgba(255,254,250,1) 100%);
+    /* background: rgb(175,182,177);
+    background: linear-gradient(0deg,#87AAAA 0%, rgba(255,254,250,1) 100%); */
+    background-color: #87AAAA;
 }
 
 .login-container{
@@ -85,5 +86,19 @@ span{
 }
 
 .img-logo:hover{
-    transform: rotate(180deg);
+    transform: scale(1.1)
+}
+
+.formusu:focus{
+    box-shadow: 2px 2px 12px rgba(51, 51, 51, 0.37),-2px -2px 12px rgba(51, 51, 51, 0.37);
+}
+
+.open{
+    position: absolute;
+    right: 0;
+    margin-right: 32px;
+}
+
+.open:hover{
+    filter: invert(100%)
 }

@@ -1,0 +1,70 @@
+
+<!-- style="background-color: #333;color: white;" -->
+
+<div class="">
+    <div class="d-flex justify-content-between align-items-center" style="background-color: #333;color: white;">
+        <h2 class="fw-bold ps-5 py-4">Seguimiento de la compra actual</h2>
+        <!-- <button type="button" disabled class="btn btn-secondary" title="Limpiar Pedido" (click)="limpiarPedido()">•</button> -->
+    </div>
+    
+    <div class="container mt-4">
+
+    <div class="row">
+        <div class="col-8">
+            <div *ngIf="dvStorageList.length < 1;else mostrar">
+                No tiene pedidos actuales
+            </div>
+            <ng-template #mostrar>
+
+                <div class="contenedor-detalle">
+                    <h4>Pedido actual...</h4>
+                    <div class="detalle d-flex justify-content-between p-3 alert alert-secondary mb-4" *ngFor="let dv of dvStorageList">
+                        <div class="d-flex justify-content-start">
+                            <div class="img-container">
+                                <img [src]="dv.idPro.imagen" width="150px" alt="">
+                            </div>
+                            <div class="desc-container ps-3">
+                                <p class="fw-bold fs-5 mb-1" >{{dv.idPro.nombre}}</p>
+                                <p class="mt-0">{{dv.idPro.idCat.nombre}}</p>
+                                <p class="text-danger fs-3 mb-0 fw-bold">S/. {{utils.formatearPrecio(dv.idPro.precio)}}</p>
+                                <p> Producto de calidad</p>
+                            </div>
+                        </div>
+                        <div class="cant-delete d-flex flex-column justify-content-between">
+                            <div class="text-end">
+                                <a class="text-danger" (click)="eliminarDetallePedido(dv.idDetalleVenta)" [routerLink]="['/compra']" >Eliminar</a>
+                            </div>
+                            <div>
+                                <label for="can">Cantidad </label>
+                                <input type="number" id="can" style="position: relative;width: 50px;margin-left: 8px;" readonly (input)="cantidadEvent($event)" value="{{dv.cantidad}}" placeholder="Cantidad..." min="1" >
+                            </div>
+                        </div>
+
+                    </div>
+
+            </div>
+            </ng-template>
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-header">
+                    Total Venta
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center ">
+                        <span>Cantidad Productos({{cantidadTotal}}):</span>
+                        <span>S/. {{utils.formatearPrecio(precioTotales)}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center pt-3">
+                        <span>Total:</span>
+                        <span>S/. {{utils.formatearPrecio(precioTotales)}}</span>
+                    </div>
+                    <div class="mt-4">
+                        <button class="btn btn-danger w-100 btn-compra"  [disabled]="dvStorageList.length==0" [routerLink]="['/pago']" >Continuar Compra</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

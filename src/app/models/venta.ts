@@ -1,19 +1,16 @@
 import { Usuario } from './usuario';
-export class Venta {
+export class Ventas {
 
     ventaId:number
     fecha:Date
-    total:number
-    usuId:Usuario
+    id:Usuario
 
     constructor(ventaId:number=null,
         fecha:Date=null,
-        total:number=0,
-        usuId:Usuario=null){
+        id:Usuario=null){
         this.ventaId=ventaId
         this.fecha=fecha
-        this.total=total
-        this.usuId=usuId
+        this.id=id
     }
 
 }

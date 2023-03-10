@@ -17,7 +17,7 @@ export class AdministracionComponent implements OnInit {
   }
 
   obtenerRol(){
-    this.rol=JSON.parse(localStorage.getItem("usuario")).rol.nombre
+    this.rol=JSON.parse(localStorage.getItem("usuario")).idRol.nombre
     console.log(this.rol);
     
   }

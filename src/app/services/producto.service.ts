@@ -26,4 +26,14 @@ export class ProductoService {
     
   }
 
+  update(producto:Producto):Promise<number>{
+    try {
+      return this.http.put<number>(this.url,producto).toPromise()  
+    } catch (error) {
+      console.log(error);
+      return null
+    }
+    
+  }
+
 }
